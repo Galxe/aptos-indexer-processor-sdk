@@ -30,5 +30,5 @@ toml = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 
-[target.'cfg(target_os = "linux")'.dependencies]
-aptos-system-utils = { workspace = true }
+# [target.'cfg(target_os = "linux")'.dependencies]
+# aptos-system-utils = { workspace = true }

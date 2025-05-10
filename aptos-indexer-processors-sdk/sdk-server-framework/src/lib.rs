@@ -5,8 +5,8 @@ use aptos_indexer_processor_sdk::{
     instrumented_channel::channel_metrics::init_channel_metrics_registry,
     utils::step_metrics::init_step_metrics_registry,
 };
-#[cfg(target_os = "linux")]
-use aptos_system_utils::profiling::start_cpu_profiling;
+// #[cfg(target_os = "linux")]
+// use aptos_system_utils::profiling::start_cpu_profiling;
 use autometrics::settings::AutometricsSettings;
 use axum::{http::StatusCode, response::IntoResponse, routing::get, Router};
 use backtrace::Backtrace;
@@ -210,23 +210,7 @@ async fn metrics_handler() -> impl IntoResponse {
 
 #[cfg(target_os = "linux")]
 async fn profilez_handler() -> impl IntoResponse {
-    match start_cpu_profiling(10, 99, false).await {
-        Ok(body) => (
-            StatusCode::OK,
-            [
-                ("Content-Length", body.len().to_string()),
-                ("Content-Disposition", "inline".to_string()),
-                ("Content-Type", "image/svg+xml".to_string()),
-            ],
-            body,
-        )
-            .into_response(),
-        Err(e) => (
-            StatusCode::INTERNAL_SERVER_ERROR,
-            format!("Profiling failed: {e:?}."),
-        )
-            .into_response(),
-    }
+    todo!()
 }
 
 #[cfg(test)]
